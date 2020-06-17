@@ -7,6 +7,9 @@ package com.cours.gestion.personne;
 
 import javax.swing.JFrame;
 
+import com.cours.dao.IPersonneDao;
+import com.cours.dao.factory.AbstractDaoFactory;
+
 /**
  *
  * @author elhad
@@ -14,17 +17,23 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -558099545401707240L;
+	private IPersonneDao personneDao = null;
 
 	public MainFrame() {
 		super();
-		this.setTitle("Appli Gestion Personnes");
-		this.setSize(1000,700);
+		personneDao = AbstractDaoFactory.getDaoFactory(AbstractDaoFactory.FactoryType.SQL_DAO).getPersonneDao();
+		this.setTitle("Application Gestion Personnes");
+		this.setSize(1000, 700);
 		this.setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		FormConnexionPanel formConnexionPanel = new FormConnexionPanel(this);
 		this.getContentPane().add(formConnexionPanel);
+	}
+
+	public IPersonneDao getPersonneDao() {
+		return personneDao;
 	}
 }
