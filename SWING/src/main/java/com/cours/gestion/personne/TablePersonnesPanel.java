@@ -47,6 +47,8 @@ public class TablePersonnesPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("*********************** Clic sur buttonDeconnect ***************************");
+				getMainFrame().setContentPane(new FormConnexionPanel(mainFrame));
+                getMainFrame().setVisible(true);
 			}
 		});
 		Box hBoxButtonDisconnect = Box.createHorizontalBox();
@@ -153,5 +155,9 @@ public class TablePersonnesPanel extends JPanel {
 		this.add(hBoxPanelUp);
 		this.add(hBoxPanelDown);
 
+	}
+	
+	public MainFrame getMainFrame() {
+		return mainFrame;
 	}
 }

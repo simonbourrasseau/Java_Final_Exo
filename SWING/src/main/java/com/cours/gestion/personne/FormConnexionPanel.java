@@ -85,7 +85,7 @@ public class FormConnexionPanel extends JPanel {
 				
                 Personne personneAuthenticate = personneDao.authenticate(textFieldPrenom.getText(), textFieldNom.getText());
                 if(personneAuthenticate != null) {
-	                getMainFrame().setContentPane(new TablePersonnesPanel());
+	                getMainFrame().setContentPane(new TablePersonnesPanel(mainFrame));
 	                getMainFrame().setVisible(true);
                 }
 			}
