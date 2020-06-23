@@ -18,8 +18,8 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import com.cours.dao.IPersonneDao;
-a
+//import com.cours.dao.IPersonneDao;
+
 /**
  *
  * @author elhad
@@ -76,8 +76,8 @@ public class FormConnexionPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("*********************** Clic sur buttonValider ***************************");
-				IPersonneDao personneDao = getMainFrame().getPersonneDao();
-				System.out.println("Personnes : " + personneDao.findAll());
+				//IPersonneDao personneDao = getMainFrame().getPersonneDao();
+				//System.out.println("Personnes : " + personneDao.findAll());
 				labelError.setText("Erreur : Votre Prenom ou votre Nom est incorrecte");
 			}
 		});
