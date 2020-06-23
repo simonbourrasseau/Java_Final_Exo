@@ -16,6 +16,9 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -43,13 +46,28 @@ public class TablePersonnesPanel extends JPanel {
 
 	public final void createTablePersonnesPanel() {
 
+		List<Personne> arrayPersonne = new ArrayList<Personne>(Arrays.asList(
+				new Personne(15, "Serge", "Lama", 102.0, 195.0, "rue des Heureux", "Nantes", "44000", "France"),
+				new Personne(16, "Vincent", "Thomas", 81.0, 183.0, "rue de Paris", "Rennes", "35000", "France"),
+				new Personne(17, "Eric", "Dummat", 61.0, 155.0, "rue de Versaille", "Paris", "75000", "France"),
+				new Personne(18, "Nicolas", "Samuel", 64.0, 145.0, "rue de Saint Louis", "Laval", "53000", "France"),
+				new Personne(19, "Rémy", "Guerry", 79.0, 191.0, "rue des Sages", "Lyon", "69000", "France"),
+				new Personne(20, "Nicolas", "Drapeau", 56.0, 166.0, "rue Mitterrand", "Limoges", "87000", "France"),
+				new Personne(21, "Gaelle", "Letourneau", 96.0, 195.0, "rue Jean François", "Rouen", "76000", "France"),
+				new Personne(22, "Jacques", "Dupont", 85.0, 179.0, "rue des Anges", "Paris", "75000", "France")));
+
+
+		Object[][] data = new Object[arrayPersonne.size()][];
+		int i=0;
+
 		// ------ Table Personne
-		Object[][] data = {
-				{"Cysboy", "28 ans", "1.80 m"},
-				{"BZHHydde", "28 ans", "1.80 m"},
-				{"IamBow", "24 ans", "1.90 m"},
-				{"FunMan", "32 ans", "1.85 m"}
-		};
+		for(Personne p: arrayPersonne){
+
+			data[i] = new Object[]{p.getNom(), p.getPrenom(), p.getCodePostal()};
+			i++;
+
+
+		}
 		String  title[] = {"Pseudo", "Age", "Taille"};
 		this.tablePersonnes = new JTable(data, title);
 
