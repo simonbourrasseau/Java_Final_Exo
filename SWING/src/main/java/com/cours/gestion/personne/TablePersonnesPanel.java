@@ -31,6 +31,7 @@ public class TablePersonnesPanel extends JPanel {
 	private MainFrame mainFrame = null;
 	private JTable tablePersonnes = null;
 
+
 	public TablePersonnesPanel() {
 		super();
 	}
@@ -41,6 +42,19 @@ public class TablePersonnesPanel extends JPanel {
 	}
 
 	public final void createTablePersonnesPanel() {
+
+		// ------ Table Personne
+		Object[][] data = {
+				{"Cysboy", "28 ans", "1.80 m"},
+				{"BZHHydde", "28 ans", "1.80 m"},
+				{"IamBow", "24 ans", "1.90 m"},
+				{"FunMan", "32 ans", "1.85 m"}
+		};
+		String  title[] = {"Pseudo", "Age", "Taille"};
+		this.tablePersonnes = new JTable(data, title);
+
+
+
 		// ------ Button Disconnect
 		JButton buttonDisconnect = new JButton("Déconnexion");
 		buttonDisconnect.addActionListener(new ActionListener() {
@@ -141,6 +155,7 @@ public class TablePersonnesPanel extends JPanel {
 		hBoxButtonDelete.setBorder(new CompoundBorder(hBoxButtonDelete.getBorder(), new EmptyBorder(0, 0, 0, 0)));
 
 		Box hBoxPanelUp = Box.createHorizontalBox();
+		Box hBoxPanelMiddle = Box.createHorizontalBox();
 		Box hBoxPanelDown = Box.createHorizontalBox();
 
 		hBoxPanelUp.add(hBoxButtonDisconnect);
@@ -148,15 +163,17 @@ public class TablePersonnesPanel extends JPanel {
 		hBoxPanelUp.add(hBoxButtonExportCSV);
 		hBoxPanelUp.add(hBoxButtonExportJSON);
 		hBoxPanelDown.add(hBoxbuttonImportXML);
+		hBoxPanelMiddle.add(tablePersonnes);
 		hBoxPanelDown.add(hBoxButtonAdd);
 		hBoxPanelDown.add(hBoxButtonModify);
 		hBoxPanelDown.add(hBoxButtonDelete);
 
 		this.add(hBoxPanelUp);
+		this.add(hBoxPanelMiddle);
 		this.add(hBoxPanelDown);
 
 	}
-	
+
 	public MainFrame getMainFrame() {
 		return mainFrame;
 	}
