@@ -7,8 +7,8 @@ package com.cours.gestion.personne;
 
 import javax.swing.JFrame;
 
-import com.cours.dao.IPersonneDao;
-import com.cours.dao.factory.AbstractDaoFactory;
+import com.cours.dao.src.main.java.com.cours.dao.IPersonneDao;
+import com.cours.dao.src.main.java.com.cours.dao.factory.AbstractDaoFactory;
 
 /**
  *
@@ -32,8 +32,8 @@ public class MainFrame extends JFrame {
 		FormConnexionPanel formConnexionPanel = new FormConnexionPanel(this);
 		this.getContentPane().add(formConnexionPanel);
 
-		//TablePersonnesPanel tablePersonnesPanel = new TablePersonnesPanel(this);
-		//this.getContentPane().add(tablePersonnesPanel);
+		/*TablePersonnesPanel tablePersonnesPanel = new TablePersonnesPanel(this);
+		this.getContentPane().add(tablePersonnesPanel);*/
 
 		//FormCreateOrModifyPanel formCreateOrModifyPanel = new FormCreateOrModifyPanel(this);
 		//this.getContentPane().add(formCreateOrModifyPanel);
