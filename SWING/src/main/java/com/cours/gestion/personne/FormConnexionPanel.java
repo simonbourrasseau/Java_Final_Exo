@@ -18,7 +18,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
-import com.cours.dao.src.main.java.com.cours.dao.IPersonneDao;
+import com.cours.dao.IPersonneDao;
 import com.cours.dao.impl.sql.SqlPersonneDaoImpl;
 import com.cours.entities.Personne;
 

@@ -5,7 +5,7 @@
  */
 package com.cours.gestion.personne.main;
 
-//import com.cours.dao.impl.sql.SqlPersonneDaoImpl;
+import com.cours.dao.impl.sql.SqlPersonneDaoImpl;
 import com.cours.gestion.personne.MainFrame;
 
 /**
