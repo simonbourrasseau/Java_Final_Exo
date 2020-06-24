@@ -9,6 +9,13 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import com.cours.dao.IPersonneDao;
+import com.cours.dao.factory.AbstractDaoFactory;
+import com.cours.dao.factory.SqlDaoFactory;
+import com.cours.entities.Personne;
+import com.cours.dao.factory.AbstractDaoFactory.FactoryType;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,12 +46,26 @@ public class FormCreateOrModifyPanel extends JPanel {
 	private JLabel labelCodePostal = null;
 	private JTextField textFieldCodePostal = null;
 	private JLabel labelError = new JLabel();
+	
+	private String action = "create";
+	private JLabel labelTaille;
+	private JTextField textFieldTaille;
+	
+	//private IPersonneDao personneDao = getMainFrame().getPersonneDao();
+	
 
 	public FormCreateOrModifyPanel() {
 	}
 
 	public FormCreateOrModifyPanel(MainFrame mainFrame) {
 		this.mainFrame = mainFrame;
+		
+		createFormConnexion();
+	}
+	
+	public FormCreateOrModifyPanel(MainFrame mainFrame, String action ) {
+		this.mainFrame = mainFrame;
+		this.action = action;
 		createFormConnexion();
 	}
 
@@ -87,6 +108,17 @@ public class FormCreateOrModifyPanel extends JPanel {
 		hBoxPoids.add(textFieldPoids);
 		hBoxPoids.setPreferredSize(new Dimension(250, 40));
 		hBoxPoids.setBorder(new CompoundBorder(hBoxPoids.getBorder(), new EmptyBorder(5, 0, 5, 0)));
+		
+		// ------ Label Taille
+		Box hBoxTaille = Box.createHorizontalBox();
+		labelTaille = new JLabel("Taille : ");
+		labelTaille.setPreferredSize(new Dimension(75, 50));
+		textFieldTaille = new JTextField();
+		textFieldTaille.setPreferredSize(new Dimension(120, 35));
+		hBoxTaille.add(labelTaille);
+		hBoxTaille.add(textFieldTaille);
+		hBoxTaille.setPreferredSize(new Dimension(250, 40));
+		hBoxTaille.setBorder(new CompoundBorder(hBoxTaille.getBorder(), new EmptyBorder(5, 0, 5, 0)));
 
 		// ------ Label Rue
 		Box hBoxRue = Box.createHorizontalBox();
@@ -103,7 +135,7 @@ public class FormCreateOrModifyPanel extends JPanel {
 		Box hBoxVille = Box.createHorizontalBox();
 		labelVille = new JLabel("Ville : ");
 		labelVille.setPreferredSize(new Dimension(75, 50));
-		comboVille = new JComboBox();
+		comboVille = new JComboBox(new String[] {"Laval","Paris","Nantes","Rouen","Havre","Rennes","Lyon","Nice","Marseille","Lille","Limoges"});
 		comboVille.setPreferredSize(new Dimension(120, 35));
 		hBoxVille.add(labelVille);
 		hBoxVille.add(comboVille);
@@ -127,9 +159,22 @@ public class FormCreateOrModifyPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("*********************** Clic sur buttonValider ***************************");
-				//IPersonneDao personneDao = getMainFrame().getPersonneDao();
-				//System.out.println("Personnes : " + personneDao.findAll());
+				IPersonneDao personneDao = getMainFrame().getPersonneDao();
+				System.out.println("Personnes : " + personneDao.findAll());
 				labelError.setText("Erreur : Votre Prenom ou votre Nom est incorrecte");
+				switch (action) {
+				case "create":
+					Personne createPersonne = new Personne(personneDao.generateIdPersonne(), textFieldPrenom.getText(), textFieldNom.getText(), Double.parseDouble(textFieldPoids.getText()), Double.parseDouble(textFieldTaille.getText()), textFieldRue.getText(), textFieldCodePostal.getText(), String.valueOf(comboVille.getSelectedItem()), "France");
+					personneDao.create(createPersonne);
+				case "modify":
+					if(personneDao.authenticate(textFieldPrenom.getText(), textFieldNom.getText()) != null) {
+						personneDao.update(personneDao.authenticate(textFieldPrenom.getText(), textFieldNom.getText()));
+					}else {
+						labelError.setText("Erreur : Votre Prenom ou votre Nom est incorrecte");
+					}
+				}
+				getMainFrame().setContentPane(new TablePersonnesPanel(mainFrame));
+	            getMainFrame().setVisible(true);
 			}
 		});
 
@@ -144,9 +189,8 @@ public class FormCreateOrModifyPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("*********************** Clic sur buttonAnnuler ***************************");
-				//IPersonneDao personneDao = getMainFrame().getPersonneDao();
-				//System.out.println("Personnes : " + personneDao.findAll());
-				//labelError.setText("Erreur : Votre Prenom ou votre Nom est incorrecte");
+				 getMainFrame().setContentPane(new TablePersonnesPanel(mainFrame));
+	             getMainFrame().setVisible(true);
 			}
 		});
 
@@ -165,6 +209,7 @@ public class FormCreateOrModifyPanel extends JPanel {
 		vBoxPanel.add(hBoxPrenom);
 		vBoxPanel.add(hBoxNom);
 		vBoxPanel.add(hBoxPoids);
+		vBoxPanel.add(hBoxTaille);
 		vBoxPanel.add(hBoxRue);
 		vBoxPanel.add(hBoxVille);
 		vBoxPanel.add(hBoxCodePostal);

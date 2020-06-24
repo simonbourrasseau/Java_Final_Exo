@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.cours.gestion.personne;
 
 import javax.swing.JPanel;
@@ -14,6 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import com.cours.entities.Personne;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -141,7 +139,8 @@ public class TablePersonnesPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("*********************** Clic sur Ajouter ***************************");
-
+				getMainFrame().setContentPane(new FormCreateOrModifyPanel(mainFrame, "create"));
+                getMainFrame().setVisible(true);
 			}
 		});
 		Box hBoxButtonAdd = Box.createHorizontalBox();
@@ -154,6 +153,8 @@ public class TablePersonnesPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("*********************** Clic sur Modifier ***************************");
+				getMainFrame().setContentPane(new FormCreateOrModifyPanel(mainFrame, "modify"));
+                getMainFrame().setVisible(true);
 			}
 		});
 		Box hBoxButtonModify = Box.createHorizontalBox();
